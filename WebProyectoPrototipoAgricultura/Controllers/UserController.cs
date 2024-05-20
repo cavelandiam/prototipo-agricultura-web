@@ -18,11 +18,25 @@ namespace WebProyectoPrototipoAgricultura.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+
             if (!User.Identity.IsAuthenticated)
             {
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            var isFarmerClaim = User.Claims.FirstOrDefault(c => c.Type == "IsFarmer");
+
+            if (isFarmerClaim != null)
+            {
+                if (bool.TryParse(isFarmerClaim.Value, out bool isFarmer) && isFarmer)
+                {
+                    return RedirectToAction("IndexAgricultor", "Producto");
+                }
+                else
+                {
+                    return RedirectToAction("IndexCliente", "Producto");
+                }
+            }
+            return RedirectToAction("Login", "User");            
         }
 
         [HttpGet]
@@ -83,9 +97,9 @@ namespace WebProyectoPrototipoAgricultura.Controllers
                 SetClaimsIdentity(usuario);
                 if (usuario.IsFarmer)
                 {
-                    return RedirectToAction("Index", "Producto");
+                    return RedirectToAction("IndexAgricultor", "Producto");
                 }
-                return RedirectToAction("IndexCliente", "Home");
+                return RedirectToAction("IndexCliente", "Producto");
             }
             return RedirectToAction("Create", "User");
         }

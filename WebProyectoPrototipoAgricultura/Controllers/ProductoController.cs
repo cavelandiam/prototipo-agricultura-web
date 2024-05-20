@@ -10,8 +10,9 @@ namespace WebProyectoPrototipoAgricultura.Controllers
 {
     public class ProductoController : Controller
     {
+
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAgricultor()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -21,7 +22,22 @@ namespace WebProyectoPrototipoAgricultura.Controllers
                 {
                     var consulta = JsonConvert.DeserializeObject<IEnumerable<Producto>>(response.Content.ReadAsStringAsync().Result);
                     return View(consulta);
-                }                                
+                }
+            }
+            return RedirectToAction("Login", "User");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> IndexCliente()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                HttpResponseMessage response = await ApiConnection.Initial().GetAsync($"producto");
+                if (response.IsSuccessStatusCode)
+                {
+                    var consulta = JsonConvert.DeserializeObject<IEnumerable<Producto>>(response.Content.ReadAsStringAsync().Result);
+                    return View(consulta);
+                }
             }
             return RedirectToAction("Login", "User");
         }
@@ -49,7 +65,7 @@ namespace WebProyectoPrototipoAgricultura.Controllers
             HttpResponseMessage response = await ApiConnection.InitialWithBearerToken(HttpContext.Request.Cookies[".AspNetCore.Token"]).PostAsync("producto", formContent);
             if (response.StatusCode == HttpStatusCode.Created)
             {
-                return RedirectToAction("Index", "Producto");
+                return RedirectToAction("IndexAgricultor", "Producto");
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
