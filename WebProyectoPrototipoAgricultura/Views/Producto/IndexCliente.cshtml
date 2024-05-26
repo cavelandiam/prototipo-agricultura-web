@@ -7,13 +7,17 @@
 
 
 <div class="container">
-    <h1>Todos los Productos</h1>    
-    
-    <table class="table">
+    <h1>Todos los Productos</h1>
+
+    <button id="buttonID" class="btn btn-success" title="ad action">Comprar Productos</button>
+    <table class="table" id="productos">
         <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
@@ -26,7 +30,7 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CantidadDisponible)
-                </th>                
+                </th>
                 <th>Agregar al Carrito</th>
             </tr>
         </thead>
@@ -36,6 +40,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(modelItem => item.Agricultor.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
@@ -50,14 +57,11 @@
                         @Html.DisplayFor(modelItem => item.CantidadDisponible)
                     </td>
                     <td>
-                        @Html.CheckBox("isActive", false)
-                        <input type='number' value='1' min='0' max='100' step='1'>
+                        @Html.CheckBoxFor(modelItem => item.Selected)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    
 </div>
-
-
-

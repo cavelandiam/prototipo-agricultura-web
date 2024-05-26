@@ -7,24 +7,24 @@ namespace WebProyectoPrototipoAgricultura.Models.Requests
 {
     public class Pago
     {
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("id")]
+        [DisplayName("Id")]
         public long? Id {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("pedido")]
+        [DisplayName("Pedido")]
         public Pedido Pedido {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("monto")]
+        [DisplayName("Monto")]
         public double Monto {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("metodoPago")]
+        [DisplayName("Método de Pago")]
         public string MetodoPago {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
-        public Date FechaPago {get; set;}
+        [JsonProperty("fechaPago")]
+        [DisplayName("Fecha de Pago")]
+        public DateTime FechaPago {get; set;}
     }
 }

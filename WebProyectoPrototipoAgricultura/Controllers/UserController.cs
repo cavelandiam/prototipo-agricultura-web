@@ -94,7 +94,7 @@ namespace WebProyectoPrototipoAgricultura.Controllers
                 var usuario = JsonConvert.DeserializeObject<User>(result);
                 Response.Cookies.Append(".AspNetCore.Token", result, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });                
                 var value = HttpContext.Request.Cookies[".AspNetCore.Token"];
-                SetClaimsIdentity(usuario);
+                SetClaimsIdentity(usuario);                               
                 if (usuario.IsFarmer)
                 {
                     return RedirectToAction("IndexAgricultor", "Producto");
@@ -122,6 +122,7 @@ namespace WebProyectoPrototipoAgricultura.Controllers
         {
             return
                      [
+                        new Claim(ClaimTypes.NameIdentifier, usuario.Id),
                          new Claim(ClaimTypes.Name, usuario.DocumentNumber),
                          new Claim(ClaimTypes.Role, usuario.IsFarmer.ToString())
                      ];

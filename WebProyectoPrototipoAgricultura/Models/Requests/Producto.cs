@@ -33,5 +33,7 @@ namespace WebProyectoPrototipoAgricultura.Models.Requests
         [JsonProperty("state")]
         [DisplayName("Estado")]
         public bool State {get; set;}
+        
+        public bool Selected { get; set; }
     }
 }

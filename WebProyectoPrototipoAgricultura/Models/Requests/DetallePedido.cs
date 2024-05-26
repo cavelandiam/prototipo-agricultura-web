@@ -6,24 +6,24 @@ namespace WebProyectoPrototipoAgricultura.Models.Requests
 {
     public class DetallePedido
     {
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("id")]
+        [DisplayName("Id")]
         public long? Id {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("pedido")]
+        [DisplayName("Pedido")]
         public Pedido Pedido {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("producto")]
+        [DisplayName("Producto")]
         public Producto Producto {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("cantidad")]
+        [DisplayName("Cantidad")]
         public int Cantidad {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("precio")]
+        [DisplayName("Precio")]
         public double Precio {get; set;}
     }
 }

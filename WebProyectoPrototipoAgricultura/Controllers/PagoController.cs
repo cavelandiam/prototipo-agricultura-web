@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 using WebProyectoPrototipoAgricultura.Models.Requests;
+using WebProyectoPrototipoAgricultura.Utils;
 
 namespace WebProyectoPrototipoAgricultura.Controllers
 {
@@ -11,10 +16,22 @@ namespace WebProyectoPrototipoAgricultura.Controllers
             return View(new List<Pago>());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
+        [HttpPost]
+        public async Task<Pago> Create(Pedido pedido, string token)
         {
-            return PartialView("~/Views/Pago/Create.cshtml");
+            var json = JsonConvert.SerializeObject(new Pago
+            {
+                Pedido = pedido,
+                Monto = 0,
+                MetodoPago = "EFECTIVO"
+            });
+            var formContent = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiConnection.InitialWithBearerToken(token).PostAsync("pago", formContent);
+            if (response.StatusCode != HttpStatusCode.Created)
+            {
+                return null;
+            }
+            return JsonConvert.DeserializeObject<Pago>(response.Content.ReadAsStringAsync().Result);
         }
     }
 }

@@ -7,28 +7,28 @@ namespace WebProyectoPrototipoAgricultura.Models.Requests
 {
     public class Pedido
     {
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("id")]
+        [DisplayName("Id")]
         public long? Id {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("cliente")]
+        [DisplayName("Cliente")]
         public User Cliente {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
-        public Date FechaPedido {get; set;}
+        [JsonProperty("fechaPedido")]
+        [DisplayName("Fecha de Pedido")]
+        public DateTime FechaPedido {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("estado")]
+        [DisplayName("Estado")]
         public string Estado {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("detallesPedido")]
+        [DisplayName("Detalles del Pedido")]
         public List<DetallePedido> DetallesPedido {get; set;}
 
-        [JsonProperty("")]
-        [DisplayName("")]
+        [JsonProperty("total")]
+        [DisplayName("Total")]
         public double Total {get; set;}
     }
 }
